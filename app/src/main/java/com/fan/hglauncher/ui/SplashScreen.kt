@@ -117,7 +117,7 @@ fun SplashScreen(onFinished: () -> Unit) {
                 color = Color(0xFF4B515A)
             )
             Spacer(Modifier.height(6.dp))
-            Text("BUILD 0.1.0-alpha", fontSize = 10.sp, color = Color(0xFF4B515A), fontFamily = Mono)
+            Text("BUILD 0.1.1", fontSize = 10.sp, color = Color(0xFF4B515A), fontFamily = Mono)
         }
     }
 }
