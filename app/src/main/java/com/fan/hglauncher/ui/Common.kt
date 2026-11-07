@@ -254,7 +254,7 @@ fun LauncherTopBar(onCheck: () -> Unit, onSettings: () -> Unit) {
         Spacer(Modifier.width(11.dp))
         Column {
             Text("HG LAUNCHER", fontSize = 12.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 3.sp)
-            Text("FAN CLIENT / 0.1.0", fontSize = 8.5.sp, color = MutedDim, letterSpacing = 1.4.sp, fontFamily = Mono)
+            Text("FAN CLIENT / 0.1.1", fontSize = 8.5.sp, color = MutedDim, letterSpacing = 1.4.sp, fontFamily = Mono)
         }
         Spacer(Modifier.weight(1f))
         IconSquare("⟳", onCheck)
