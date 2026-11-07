@@ -13,7 +13,8 @@ data class Game(
     val status: String,
     val glyph: String,
     val installed: Boolean,
-    val isNew: Boolean = false
+    val isNew: Boolean = false,
+    val packageName: String = ""
 )
 
 data class NewsItem(
