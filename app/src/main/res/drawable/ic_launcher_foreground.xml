@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 外圈六边形 -->
+    <path
+        android:fillColor="#FFC21A"
+        android:pathData="M54,22 L81,38 L81,70 L54,86 L27,70 L27,38 Z" />
+
+    <!-- 内部镂空 -->
+    <path
+        android:fillColor="#0A0B0D"
+        android:pathData="M54,37 L69,46 L69,62 L54,71 L39,62 L39,46 Z" />
+
+    <!-- 中心菱形 -->
+    <path
+        android:fillColor="#FFC21A"
+        android:pathData="M54,45 L62,54 L54,63 L46,54 Z" />
+</vector>
