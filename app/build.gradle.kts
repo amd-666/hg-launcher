@@ -11,8 +11,8 @@ android {
         applicationId = "com.fan.hglauncher"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "0.1.0-alpha"
+        versionCode = 2
+        versionName = "0.1.1"
 
         // 更新清单地址：填你自己的 JSON 地址即可启用真实检查。
         // JSON 结构：{"version":"0.2.0","url":"https://.../app.apk","notes":"更新说明"}
