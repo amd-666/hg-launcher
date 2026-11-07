@@ -1,10 +1,12 @@
 package com.fan.hglauncher
 
 import android.app.Application
+import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.fan.hglauncher.data.AuthRepository
 import com.fan.hglauncher.data.DownloadTask
+import com.fan.hglauncher.data.Game
 import com.fan.hglauncher.data.GameRepository
 import com.fan.hglauncher.data.LocalStore
 import com.fan.hglauncher.data.UpdateChecker
@@ -33,7 +35,18 @@ class LauncherViewModel(app: Application) : AndroidViewModel(app) {
     private val _user = MutableStateFlow(store.user)
     val user = _user.asStateFlow()
 
-    val games = GameRepository.games
+    /** 启动时做一次真实安装检测，游戏卡片状态以本机为准 */
+    val games: List<Game> = GameRepository.games.map { g ->
+        val installed = isInstalled(g.packageName)
+        g.copy(
+            installed = installed,
+            status = when {
+                g.id == "endfield" -> "预约中"
+                installed -> "已安装 · 就绪"
+                else -> "未安装"
+            }
+        )
+    }
     val news = GameRepository.news
 
     private val _download = MutableStateFlow(DownloadTask())
@@ -95,6 +108,39 @@ class LauncherViewModel(app: Application) : AndroidViewModel(app) {
         store.user = null
         _user.value = null
         notify("已退出登录")
+    }
+
+    // ---------- 启动游戏 ----------
+
+    private fun isInstalled(packageName: String): Boolean {
+        if (packageName.isBlank()) return false
+        return getApplication<Application>().packageManager
+            .getLaunchIntentForPackage(packageName) != null
+    }
+
+    /**
+     * 真正的启动逻辑：检测包名 -> 拉起 launcher Activity。
+     * 未安装时给出提示（本机没有对应游戏时也走这条分支）。
+     */
+    fun launchGame(game: Game) {
+        val ctx = getApplication<Application>()
+        val name = game.title.replace("\n", "")
+
+        if (game.packageName.isBlank()) {
+            notify("「$name」暂不支持启动")
+            return
+        }
+
+        val intent = ctx.packageManager.getLaunchIntentForPackage(game.packageName)
+        if (intent == null) {
+            notify("未检测到《$name》，请先安装或前往应用商店")
+            return
+        }
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        runCatching { ctx.startActivity(intent) }
+            .onSuccess { notify("正在启动《$name》…") }
+            .onFailure { notify("启动失败：${it.message ?: "未知错误"}") }
     }
 
     // ---------- 下载 ----------
