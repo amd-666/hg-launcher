@@ -165,8 +165,10 @@ gradle wrapper --gradle-version 8.7
 
 ## 六、说明
 
-- 所有「启动游戏」「打开公告」目前是 Toast 演示，不会拉起真实游戏。
-  真要拉起本机已安装的游戏，可用 `PackageManager.getLaunchIntentForPackage("<包名>")`。
+- 「开始游戏」已经接入真实启动：`PackageManager.getLaunchIntentForPackage(包名)`，
+  检测到已安装就直接拉起游戏，未安装则提示。包名映射见 `data/GameRepository.kt`，
+  Android 11+ 的包可见性声明在 `AndroidManifest.xml` 的 `<queries>` 里。
+- 「打开公告」仍是 Toast 演示。
 - 账号、下载、更新这三块都是**本地模拟 + 可替换接口**，没有对接任何官方服务，
   也不建议对接（涉及账号安全与用户协议）。
 - 素材均为自绘矢量/纯 CSS 绘制，未使用官方 logo 与美术资源。
