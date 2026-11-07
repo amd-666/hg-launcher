@@ -4,10 +4,22 @@ package com.fan.hglauncher.data
 object GameRepository {
 
     val games: List<Game> = listOf(
-        Game("ak", "明日方舟", "已安装 · 2.6.01", "R", true, isNew = true),
-        Game("ex", "来自星尘", "已安装 · 1.1.4", "X", true),
-        Game("popu", "泡姆泡姆", "未安装", "P", false),
-        Game("endfield", "明日方舟\n终末地", "预约中", "E", false)
+        Game(
+            id = "ak", title = "明日方舟", status = "已安装 · 2.6.01", glyph = "R",
+            installed = true, isNew = true, packageName = "com.hypergryph.arknights"
+        ),
+        Game(
+            id = "ex", title = "来自星尘", status = "已安装 · 1.1.4", glyph = "X",
+            installed = true, packageName = "com.hypergryph.exastris"
+        ),
+        Game(
+            id = "popu", title = "泡姆泡姆", status = "未安装", glyph = "P",
+            installed = false, packageName = "com.hypergryph.popucom"
+        ),
+        Game(
+            id = "endfield", title = "明日方舟\n终末地", status = "预约中", glyph = "E",
+            installed = false, packageName = "com.hypergryph.endfield"
+        )
     )
 
     val news: List<NewsItem> = listOf(
